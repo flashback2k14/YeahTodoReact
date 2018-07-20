@@ -1,0 +1,127 @@
+import React, { Component } from 'react';
+import logo from './logo.svg';
+import './App.css';
+import TodoList from "./todo/TodoList";
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to the React World</h1>
+        </header>
+        <p className="App-intro">
+          To get started, edit <code>src/App.js</code> and save to reload.
+        </p>
+        <div>
+          <TodoList todos={['hello', 'world']} />
+        </div>
+      </div>
+    );
+  }
+}
+
+export default App;
+
+
+
+
+import React from "react";
+import TodoItems from "../todo/TodoItems";
+import TodoInput from "../todo/TodoInput";
+
+export default class TodoList extends React.Component {
+
+  // static propTypes = {
+  //   todos: React.PropTypes.array
+  // };
+
+  constructor(props) {
+    super(props);
+    this.state = { todos: this.props.todos || [] };
+  }
+
+  addTodo = (todo) => {
+    this.setState({
+      todos: this.state.todos.concat([todo])
+    });
+  };
+
+  render() {
+    return (
+      <div>
+        <h3>TODO LIST</h3>
+        <TodoItems items={this.state.todos} />
+        <TodoInput addTodo={this.addTodo} />
+        <br />
+        <br />
+        <br />
+        <a href="https://hackernoon.com/a-react-todos-example-explained-6df53cdebed1">Tutorial</a>
+      </div>
+    );
+  };
+}
+
+
+import React from "react";
+
+export default class TodoItems extends React.Component {
+
+  // static propTypes = {
+  //   items: React.PropTypes.array.isRequired
+  // };
+
+  // useless constructor
+  // constructor (props) {
+  //   super(props);
+  // }
+
+  render() {
+    const createItem = (item, index) => {
+      return (
+        <li key={index}>{item}</li>
+      );
+    };
+
+    return (
+      <ul>
+        {this.props.items.map(createItem)}
+      </ul>
+    );
+  };
+}
+
+
+
+
+import React from "react";
+
+export default class TodoInput extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = { item: '' };
+  }
+
+  onChange = (e) => {
+    this.setState({ item: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.addTodo(this.state.item);
+    this.setState({ item: '' }, () => this.refs.txtTodo.focus());
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" ref="txtTodo"
+          onChange={this.onChange}
+          value={this.state.item} />
+        <input type="submit" value="Add" />
+      </form>
+    );
+  };
+}
