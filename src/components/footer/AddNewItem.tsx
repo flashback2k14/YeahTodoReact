@@ -1,9 +1,30 @@
 import * as React from "react";
+import TodoItem from "../../models/TodoItem";
 import "./AddNewItem.css";
 
-export class AddNewItem extends React.Component {
-  state = {
-    showContainerInput: false
+interface IAddNewItemProps {
+  addTodoFn: Function;
+}
+
+export class AddNewItem extends React.Component<IAddNewItemProps, any> {
+  private _txtTodo: any;
+
+  constructor(props: IAddNewItemProps) {
+    super(props);
+    this.state = {
+      showContainerInput: false,
+      addTodoFn: this.props.addTodoFn,
+      item: ""
+    };
+  }
+
+  private _handleOnChange = (event: any) => {
+    this.setState({ item: event.target.value });
+  };
+
+  private _handleAddClick = () => {
+    this.state.addTodoFn(new TodoItem(-1, this.state.item, false));
+    this.setState({ item: "" }, () => this._txtTodo.focus());
   };
 
   private _handleFabClick = () => {
@@ -24,9 +45,14 @@ export class AddNewItem extends React.Component {
             <input
               className="todo-input"
               type="text"
+              ref={ref => (this._txtTodo = ref)}
               placeholder="Enter todo..."
+              onChange={this._handleOnChange}
+              value={this.state.item}
             />
-            <button className="todo-button_add">add</button>
+            <button className="todo-button_add" onClick={this._handleAddClick}>
+              add
+            </button>
           </div>
         </div>
         <div className="container-fab">

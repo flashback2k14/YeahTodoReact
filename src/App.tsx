@@ -8,68 +8,99 @@ import {
 } from "./components";
 import TodoItem from "./models/TodoItem";
 
-export default class App extends React.Component {
+interface IAppState {
+  todos: Array<TodoItem>;
+}
+
+export default class App extends React.Component<any, IAppState> {
   private _isDevMode = false;
   private _hideNotReady = true;
 
-  private _gridContainer = {
-    display: "grid",
-    gridTemplateColumns: "104px 1fr 1fr 104px",
-    gridTemplateRows: "72px 1fr 48px",
-    gridGap: "5px",
-    minHeight: "100vh"
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      todos: [new TodoItem(1, "Lorem", false), new TodoItem(2, "Ipsum", true)]
+    };
+  }
+
+  private _setId = (todo: TodoItem) => {
+    todo.id = this.state.todos.length + 1;
+    return todo;
   };
-  private _gridItem = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    background: this._isDevMode ? "lightblue" : "#EEEEEE",
-    borderRadius: "4px"
+
+  addTodo = (todo: TodoItem) => {
+    this.setState((prevState, props) => {
+      return {
+        todos: prevState.todos.concat([this._setId(todo)])
+      };
+    });
   };
-  private _gridItemStart = {
-    alignItems: "start",
-    paddingTop: 16
-  };
-  private _gridColSpan2 = {
-    gridColumn: "span 2 / auto"
+
+  toggleTodo = (todoToToggle: TodoItem) => {
+    console.log(todoToToggle);
+    this.setState((prevState, props) => {
+      return {
+        todos: prevState.todos.map(todo => {
+          return todo !== todoToToggle
+            ? todo
+            : Object.assign({}, todo, { completed: !todo.isCompleted });
+        })
+      };
+    });
+    console.log(todoToToggle);
   };
 
   public render() {
     const setEmptySpaceText = () => (this._isDevMode ? "Empty Space" : "");
 
-    const todos = [
-      new TodoItem(1, "Lorem", false),
-      new TodoItem(2, "Ipsum", true)
-    ];
+    const gridContainer = {
+      display: "grid",
+      gridTemplateColumns: "104px 1fr 1fr 104px",
+      gridTemplateRows: "72px 1fr 48px",
+      gridGap: "5px",
+      minHeight: "100vh"
+    };
+    const gridItem = {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      background: this._isDevMode ? "lightblue" : "#EEEEEE",
+      borderRadius: "4px"
+    };
+    const gridItemStart = {
+      alignItems: "start",
+      paddingTop: 16
+    };
+    const gridColSpan2 = {
+      gridColumn: "span 2 / auto"
+    };
 
     return (
-      <div style={this._gridContainer}>
-        <div style={this._gridItem}>
+      <div style={gridContainer}>
+        <div style={gridItem}>
           <DisplayDate />
         </div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
-        <div style={this._gridItem}>
+        <div style={gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>
           <DisplayTime />
         </div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>{setEmptySpaceText()}</div>
         <div
           style={{
-            ...this._gridItem,
-            ...this._gridItemStart,
-            ...this._gridColSpan2
+            ...gridItem,
+            ...gridItemStart,
+            ...gridColSpan2
           }}
         >
-          <TodoList items={todos} />
+          <TodoList items={this.state.todos} toggleFn={this.toggleTodo} />
         </div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
-        <div style={this._gridItem}>
-          {this._hideNotReady ? "" : <OpenSettings />}
-        </div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
-        <div style={this._gridItem}>{setEmptySpaceText()}</div>
-        <div style={this._gridItem}>
-          <AddNewItem />
+        <div style={gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>{this._hideNotReady ? "" : <OpenSettings />}</div>
+        <div style={gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>{setEmptySpaceText()}</div>
+        <div style={gridItem}>
+          <AddNewItem addTodoFn={this.addTodo} />
         </div>
       </div>
     );

@@ -12,7 +12,6 @@ export class DisplayDate extends React.Component {
       month: "long"
     });
     const year = time.getFullYear();
-    // return <div>{`${day}. ${monthFormatter.format(time)} ${year}`}</div>;
 
     const flexMainContainer = {
       display: "flex",
