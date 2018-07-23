@@ -13,23 +13,25 @@ export class DisplayTime extends React.Component<any, IDisplayTimeState> {
     this.state = {
       time: new Date()
     };
-    this._timer = setInterval(() => {
+    this._timer = window.setInterval(() => {
       this.setState({
         time: new Date()
       });
     }, 60 * 1000);
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     clearInterval(this._timer);
   }
 
-  render() {
+  public render() {
     const { time } = this.state;
+
     const styling = {
       fontWeight: "bold",
       fontSize: "2em"
-    };
+    } as React.CSSProperties;
+
     return <div style={styling}>{Helper.getTimeString(time)}</div>;
   }
 }

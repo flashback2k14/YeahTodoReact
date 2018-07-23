@@ -18,16 +18,16 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
       justifyContent: "space-between",
       alignItems: "center",
       cursor: "default"
-    };
+    } as React.CSSProperties;
 
     const todoItemCompleted = {
       color: "#9e9e9e",
       textDecoration: "line-through"
-    };
+    } as React.CSSProperties;
 
     const todoItem = {
       fontWeight: "bold"
-    };
+    } as React.CSSProperties;
 
     return (
       <li

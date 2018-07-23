@@ -21,27 +21,27 @@ export class DisplayDate extends React.Component<any, IDisplayDateState> {
       justifyContent: "center",
       alignItems: "center",
       alignContent: "stretch"
-    };
+    } as React.CSSProperties;
 
     const flexChildContainer = {
       display: "flex",
       flexDirection: "column",
       flexWrap: "nowrap",
       justifyContent: "center",
-      alignItems: "start",
+      alignItems: "flex-start",
       alignContent: "stretch"
-    };
+    } as React.CSSProperties;
 
     const dayStyling = {
       fontWeight: "bold",
       fontSize: "2.1em",
       paddingRight: 4
-    };
+    } as React.CSSProperties;
 
     const monthYearStyling = {
       fontSize: "0.8em",
       color: "#616161"
-    };
+    } as React.CSSProperties;
 
     const { model } = this.state;
 
