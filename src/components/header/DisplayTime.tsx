@@ -1,15 +1,18 @@
 import * as React from "react";
 import * as Helper from "../../helper/Helper";
 
-export class DisplayTime extends React.Component {
-  private _timer: NodeJS.Timer;
+interface IDisplayTimeState {
+  time: Date;
+}
 
-  state = {
-    time: new Date()
-  };
+export class DisplayTime extends React.Component<any, IDisplayTimeState> {
+  private _timer: number;
 
   constructor(props: any) {
     super(props);
+    this.state = {
+      time: new Date()
+    };
     this._timer = setInterval(() => {
       this.setState({
         time: new Date()
@@ -25,7 +28,7 @@ export class DisplayTime extends React.Component {
     const { time } = this.state;
     const styling = {
       fontWeight: "bold",
-      fontSize: "2.0em"
+      fontSize: "2em"
     };
     return <div style={styling}>{Helper.getTimeString(time)}</div>;
   }

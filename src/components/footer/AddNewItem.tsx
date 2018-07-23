@@ -6,29 +6,38 @@ interface IAddNewItemProps {
   addTodoFn: Function;
 }
 
-export class AddNewItem extends React.Component<IAddNewItemProps, any> {
+interface IAddNewItemState {
+  showContainerInput: boolean;
+  itemText: string;
+}
+
+export class AddNewItem extends React.Component<
+  IAddNewItemProps,
+  IAddNewItemState
+> {
   private _txtTodo: any;
 
   constructor(props: IAddNewItemProps) {
     super(props);
     this.state = {
       showContainerInput: false,
-      addTodoFn: this.props.addTodoFn,
-      item: ""
+      itemText: ""
     };
   }
 
   private _handleOnChange = (event: any) => {
-    this.setState({ item: event.target.value });
+    this.setState({ itemText: event.target.value });
   };
 
   private _handleAddClick = () => {
-    this.state.addTodoFn(new TodoItem(-1, this.state.item, false));
-    this.setState({ item: "" }, () => this._txtTodo.focus());
+    this.props.addTodoFn(new TodoItem(-1, this.state.itemText, false));
+    this.setState({ itemText: "" }, () => this._txtTodo.focus());
   };
 
   private _handleFabClick = () => {
-    this.setState({ showContainerInput: !this.state.showContainerInput });
+    this.setState((prevState, props) => {
+      return { showContainerInput: !prevState.showContainerInput };
+    });
   };
 
   public render() {
@@ -48,7 +57,7 @@ export class AddNewItem extends React.Component<IAddNewItemProps, any> {
               ref={ref => (this._txtTodo = ref)}
               placeholder="Enter todo..."
               onChange={this._handleOnChange}
-              value={this.state.item}
+              value={this.state.itemText}
             />
             <button className="todo-button_add" onClick={this._handleAddClick}>
               add

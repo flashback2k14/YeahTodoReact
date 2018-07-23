@@ -1,18 +1,19 @@
 import * as React from "react";
+import DisplayDateModel from "../../models/DisplayDateModel";
 
-export class DisplayDate extends React.Component {
-  state = {
-    time: new Date()
-  };
+interface IDisplayDateState {
+  model: DisplayDateModel;
+}
+
+export class DisplayDate extends React.Component<any, IDisplayDateState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      model: DisplayDateModel.create(new Date())
+    };
+  }
 
   public render() {
-    const { time } = this.state;
-    const day = time.getDate();
-    const monthFormatter = new Intl.DateTimeFormat("de-DE", {
-      month: "long"
-    });
-    const year = time.getFullYear();
-
     const flexMainContainer = {
       display: "flex",
       flexDirection: "row",
@@ -42,12 +43,14 @@ export class DisplayDate extends React.Component {
       color: "#616161"
     };
 
+    const { model } = this.state;
+
     return (
       <div style={flexMainContainer}>
-        <div style={dayStyling}>{day}</div>
+        <div style={dayStyling}>{model.day}</div>
         <div style={flexChildContainer}>
-          <div style={monthYearStyling}>{monthFormatter.format(time)}</div>
-          <div style={monthYearStyling}>{year}</div>
+          <div style={monthYearStyling}>{model.month}</div>
+          <div style={monthYearStyling}>{model.year}</div>
         </div>
       </div>
     );

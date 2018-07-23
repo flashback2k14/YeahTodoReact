@@ -7,34 +7,9 @@ interface ITodoItemProps {
   toggleFn: Function;
 }
 
-interface ITodoItemState {
-  item: TodoItem;
-}
-
-export class TodoListItem extends React.Component<
-  ITodoItemProps,
-  ITodoItemState
-> {
-  constructor(props: ITodoItemProps) {
-    super(props);
-    this.state = {
-      item: this.props.item
-    };
-  }
-
+export class TodoListItem extends React.Component<ITodoItemProps, any> {
   private _handleChecked = (e: any) => {
-    // console.log(this.state.item);
-    // console.log(e.target.checked);
-    // this.setState({
-    //   item: new TodoItem(
-    //     this.state.item.id,
-    //     this.state.item.text,
-    //     e.target.checked
-    //   )
-    // });
-    // console.log(e.target.checked);
-    // console.log(this.state.item);
-    this.props.toggleFn(this.state.item);
+    this.props.toggleFn(this.props.item);
   };
 
   public render() {
@@ -42,7 +17,7 @@ export class TodoListItem extends React.Component<
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      border: "red 1px solid"
+      cursor: "default"
     };
 
     const todoItemCompleted = {
@@ -56,33 +31,21 @@ export class TodoListItem extends React.Component<
 
     return (
       <li
-        key={this.state.item.id}
-        style={this.state.item.isCompleted ? todoItemCompleted : todoItem}
+        key={this.props.item.id}
+        style={this.props.item.isCompleted ? todoItemCompleted : todoItem}
       >
         <div style={containerTodoItem}>
-          {this.state.item.text}
-          <input
-            type="checkbox"
-            onClick={this._handleChecked}
-            defaultChecked={this.state.item.isCompleted}
-          />
+          {this.props.item.text}
+          <label className="checkbox_label">
+            <input
+              type="checkbox"
+              className="checkbox"
+              onClick={this._handleChecked}
+              defaultChecked={this.props.item.isCompleted}
+            />
+          </label>
         </div>
       </li>
     );
   }
 }
-
-// <li key={item.id} style={item.isCompleted ? todoItemCompleted : todoItem}>
-//   <div style={containerTodoItem}>
-//     {item.text}
-//     <div className="round">
-//       <input
-//         type="checkbox"
-//         id="checkbox"
-//         onClick={this._handleChecked}
-//         defaultChecked={item.isCompleted}
-//       />
-//       <label htmlFor="checkbox" />
-//     </div>
-//   </div>
-// </li>

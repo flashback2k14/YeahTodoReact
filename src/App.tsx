@@ -36,25 +36,18 @@ export default class App extends React.Component<any, IAppState> {
     });
   };
 
-  private _toggle = (todo: TodoItem) => {
-    console.log("_toggle - before: " + JSON.stringify(todo));
-    const t = Object.assign({}, todo, { isCompleted: !todo.isCompleted });
-    console.log("_toggle - after : " + JSON.stringify(t));
-    return t;
-  };
-
   toggleTodo = (todoToToggle: TodoItem) => {
-    // console.log("toggleTodo - before: " + JSON.stringify(todoToToggle));
     this.setState((prevState, props) => {
-      console.log(prevState);
       return {
         todos: prevState.todos.map((todo, index) => {
-          console.log(index + " map todos: " + JSON.stringify(todo));
-          return todo !== todoToToggle ? todo : this._toggle(todoToToggle);
+          return todo !== todoToToggle
+            ? todo
+            : Object.assign({}, todoToToggle, {
+                isCompleted: !todoToToggle.isCompleted
+              });
         })
       };
     });
-    // console.log("toggleTodo - after: " + JSON.stringify(todoToToggle));
   };
 
   public render() {
