@@ -23,15 +23,10 @@ export default class App extends React.Component<any, IAppState> {
     };
   }
 
-  private _setId = (todo: TodoItem) => {
-    todo.id = this.state.todos.length + 1;
-    return todo;
-  };
-
   addTodo = (todo: TodoItem) => {
     this.setState((prevState, props) => {
       return {
-        todos: prevState.todos.concat([this._setId(todo)])
+        todos: prevState.todos.concat([todo.setId(this.state.todos.length + 1)])
       };
     });
   };
