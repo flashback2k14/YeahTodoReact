@@ -33,10 +33,14 @@
 }
 
 .round input[type="checkbox"]:checked + label {
-  background-color: black;
+  background: black;
   border-color: black;
 }
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
+}
+
+li:hover {
+  background: lightcoral;
 }

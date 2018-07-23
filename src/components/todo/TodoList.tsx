@@ -7,11 +7,7 @@ interface ITodoListProps {
   toggleFn: Function;
 }
 
-export class TodoList extends React.Component<ITodoListProps, any> {
-  constructor(props: ITodoListProps) {
-    super(props);
-  }
-
+export class TodoList extends React.Component<ITodoListProps> {
   public render() {
     const container = {
       width: "80%",

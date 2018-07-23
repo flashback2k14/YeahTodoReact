@@ -42,7 +42,7 @@ export class TodoListItem extends React.Component<
       display: "flex",
       justifyContent: "space-between",
       alignItems: "center",
-      cursor: "pointer"
+      border: "red 1px solid"
     };
 
     const todoItemCompleted = {
@@ -54,23 +54,35 @@ export class TodoListItem extends React.Component<
       fontWeight: "bold"
     };
 
-    const { item } = this.state;
-
     return (
-      <li key={item.id} style={item.isCompleted ? todoItemCompleted : todoItem}>
+      <li
+        key={this.state.item.id}
+        style={this.state.item.isCompleted ? todoItemCompleted : todoItem}
+      >
         <div style={containerTodoItem}>
-          {item.text}
-          <div className="round">
-            <input
-              type="checkbox"
-              id="checkbox"
-              onClick={this._handleChecked}
-              defaultChecked={item.isCompleted}
-            />
-            <label htmlFor="checkbox" />
-          </div>
+          {this.state.item.text}
+          <input
+            type="checkbox"
+            onClick={this._handleChecked}
+            defaultChecked={this.state.item.isCompleted}
+          />
         </div>
       </li>
     );
   }
 }
+
+// <li key={item.id} style={item.isCompleted ? todoItemCompleted : todoItem}>
+//   <div style={containerTodoItem}>
+//     {item.text}
+//     <div className="round">
+//       <input
+//         type="checkbox"
+//         id="checkbox"
+//         onClick={this._handleChecked}
+//         defaultChecked={item.isCompleted}
+//       />
+//       <label htmlFor="checkbox" />
+//     </div>
+//   </div>
+// </li>
