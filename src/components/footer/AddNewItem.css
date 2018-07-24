@@ -6,15 +6,16 @@
   align-items: center;
   align-content: center;
   position: fixed;
-  right: 82px;
+  right: 48px;
   bottom: 30px;
+  /* border: solid 5px yellow; */
 }
 
 .container-input {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  transition: all 0.75s ease;
+  transition: all 0.75s ease-in-out;
 }
 
 .container-input_hide {

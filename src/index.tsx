@@ -9,4 +9,7 @@ import App from "./App";
 // https://github.com/Lemoncode/react-typescript-samples
 // https://egghead.io/lessons/react-stop-memory-leaks-with-componentwillunmount-lifecycle-method-in-react
 
+// https://css-tricks.com/considerations-styling-modal/
+// https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom
+
 render(<App />, document.getElementById("root"));

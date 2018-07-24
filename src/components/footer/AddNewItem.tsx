@@ -30,6 +30,9 @@ export class AddNewItem extends React.Component<
   };
 
   private _handleAddClick = () => {
+    if (!this.state.itemText) {
+      return;
+    }
     this.props.addTodoFn(new TodoItem(-1, this.state.itemText, false));
     this.setState({ itemText: "" }, () => this._txtTodo.focus());
   };
@@ -38,6 +41,7 @@ export class AddNewItem extends React.Component<
     this.setState((prevState, props) => {
       return { showContainerInput: !prevState.showContainerInput };
     });
+    this._txtTodo.focus();
   };
 
   public render() {

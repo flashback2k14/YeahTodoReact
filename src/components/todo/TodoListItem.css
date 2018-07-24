@@ -3,12 +3,14 @@
   font-family: Arial, sans-serif;
   line-height: 135%;
   cursor: pointer;
+  outline: none;
 }
 
 .checkbox {
   position: relative;
   margin: 0 1em 0 0;
   cursor: pointer;
+  outline: none;
 }
 
 .checkbox:before {
