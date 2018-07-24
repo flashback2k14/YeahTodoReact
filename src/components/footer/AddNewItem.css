@@ -39,50 +39,40 @@
   align-items: center;
   width: 100%;
   margin-right: 8px;
+  padding: 4px;
+  background: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
 }
 
 .todo-input {
   width: 100%;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  height: 100%;
   margin-right: 8px;
-  padding-left: 8px;
+  padding-left: 4px;
   background: white;
   color: black;
-  border-radius: 4px;
   border: 0;
   border-bottom: 2px solid #616161;
   font-size: large;
   outline: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  z-index: 1000 !important;
 }
 
 .todo-input:hover,
 .todo-input:focus,
 .todo-input:valid {
-  border-bottom: 1px solid black;
+  border-bottom: 2px solid black;
 }
 .todo-input::placeholder {
   color: #9e9e9e;
 }
 
 .todo-button_add {
-  width: 80px;
-  padding: 3px;
-  border-radius: 4px;
-  font-size: medium;
-  text-transform: uppercase;
+  margin-top: 1px;
+  margin-right: 8px;
   cursor: pointer;
-  background: white;
-  color: black;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
   outline: none;
-}
-
-.todo-button_add:hover,
-.todo-button_add:focus {
-  background: black;
-  color: white;
 }
 
 .container-fab {

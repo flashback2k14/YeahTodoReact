@@ -19,7 +19,8 @@
   transition: all 0.15s ease-in-out;
   content: "";
   position: absolute;
-  left: 0;
+  left: 4px;
+  /* bottom: 0; */
   z-index: 1;
   width: 1em;
   height: 1em;
@@ -41,10 +42,14 @@
 .checkbox:after {
   content: "";
   position: absolute;
-  top: -0.125em;
   left: 0;
   width: 1.1em;
   height: 1.1em;
   background: #fff;
+  cursor: pointer;
+}
+
+.delete {
+  margin-top: 2px;
   cursor: pointer;
 }

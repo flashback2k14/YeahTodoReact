@@ -5,6 +5,7 @@ import TodoItem from "../../models/TodoItem";
 interface ITodoListProps {
   items: TodoItem[];
   toggleFn: Function;
+  deleteFn: Function;
 }
 
 export class TodoList extends React.Component<ITodoListProps> {
@@ -44,7 +45,13 @@ export class TodoList extends React.Component<ITodoListProps> {
         <div style={headline}>To Do</div>
         <ul style={todoList}>
           {this.props.items.map((item: TodoItem) => {
-            return <TodoListItem item={item} toggleFn={this.props.toggleFn} />;
+            return (
+              <TodoListItem
+                item={item}
+                toggleFn={this.props.toggleFn}
+                deleteFn={this.props.deleteFn}
+              />
+            );
           })}
         </ul>
       </div>

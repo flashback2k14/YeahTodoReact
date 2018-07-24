@@ -7,65 +7,44 @@ import {
   TodoList
 } from "./components";
 import TodoItem from "./models/TodoItem";
+import TodoHelper from "./helper/TodoHelper";
 
 interface IAppState {
   todos: TodoItem[];
 }
 
 export default class App extends React.Component<any, IAppState> {
-  private readonly LOCAL_STORAGE_KEY = "YeahToDo";
-
-  private _getTodos = () => {
-    const savedTodosString = window.localStorage.getItem(
-      this.LOCAL_STORAGE_KEY
-    );
-    return savedTodosString
-      ? JSON.parse(savedTodosString)
-      : [
-          new TodoItem(1, "Start learning React", true),
-          new TodoItem(2, "Start learning Redux", false)
-        ];
-  };
-
   constructor(props: any) {
     super(props);
     this.state = {
-      todos: this._getTodos()
+      todos: TodoHelper.getTodos()
     };
   }
-
-  private __add = (todos: TodoItem[], todoToAdd: TodoItem) => {
-    const tt = todos.concat([todoToAdd.setId(this.state.todos.length + 1)]);
-    window.localStorage.removeItem(this.LOCAL_STORAGE_KEY);
-    window.localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(tt));
-    return tt;
-  };
 
   private _addTodo = (todo: TodoItem) => {
     this.setState((prevState, props) => {
       return {
-        todos: this.__add(prevState.todos, todo)
+        todos: TodoHelper.add(
+          prevState.todos,
+          todo,
+          this.state.todos.length + 1
+        )
       };
     });
-  };
-
-  private __toggle = (todos: TodoItem[], todoToToggle: TodoItem) => {
-    const tt = todos.map((todo, index) => {
-      return todo !== todoToToggle
-        ? todo
-        : Object.assign({}, todoToToggle, {
-            isCompleted: !todoToToggle.isCompleted
-          });
-    });
-    window.localStorage.removeItem(this.LOCAL_STORAGE_KEY);
-    window.localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(tt));
-    return tt;
   };
 
   private _toggleTodo = (todoToToggle: TodoItem) => {
     this.setState((prevState, props) => {
       return {
-        todos: this.__toggle(prevState.todos, todoToToggle)
+        todos: TodoHelper.toggle(prevState.todos, todoToToggle)
+      };
+    });
+  };
+
+  private _deleteTodo = (todoToDelete: TodoItem) => {
+    this.setState((prevState, props) => {
+      return {
+        todos: TodoHelper.delete(prevState.todos, todoToDelete)
       };
     });
   };
@@ -113,7 +92,11 @@ export default class App extends React.Component<any, IAppState> {
             ...gridColSpan2
           }}
         >
-          <TodoList items={this.state.todos} toggleFn={this._toggleTodo} />
+          <TodoList
+            items={this.state.todos}
+            toggleFn={this._toggleTodo}
+            deleteFn={this._deleteTodo}
+          />
         </div>
         <div style={gridItem} />
         <div style={gridItem}>
