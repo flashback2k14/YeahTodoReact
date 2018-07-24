@@ -13,34 +13,59 @@ interface IAppState {
 }
 
 export default class App extends React.Component<any, IAppState> {
+  private readonly LOCAL_STORAGE_KEY = "YeahToDo";
+
+  private _getTodos = () => {
+    const savedTodosString = window.localStorage.getItem(
+      this.LOCAL_STORAGE_KEY
+    );
+    return savedTodosString
+      ? JSON.parse(savedTodosString)
+      : [
+          new TodoItem(1, "Start learning React", true),
+          new TodoItem(2, "Start learning Redux", false)
+        ];
+  };
+
   constructor(props: any) {
     super(props);
     this.state = {
-      todos: [
-        new TodoItem(1, "Start learning React", true),
-        new TodoItem(2, "Start learning Redux", false)
-      ]
+      todos: this._getTodos()
     };
   }
+
+  private __add = (todos: TodoItem[], todoToAdd: TodoItem) => {
+    const tt = todos.concat([todoToAdd.setId(this.state.todos.length + 1)]);
+    window.localStorage.removeItem(this.LOCAL_STORAGE_KEY);
+    window.localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(tt));
+    return tt;
+  };
 
   private _addTodo = (todo: TodoItem) => {
     this.setState((prevState, props) => {
       return {
-        todos: prevState.todos.concat([todo.setId(this.state.todos.length + 1)])
+        todos: this.__add(prevState.todos, todo)
       };
     });
+  };
+
+  private __toggle = (todos: TodoItem[], todoToToggle: TodoItem) => {
+    const tt = todos.map((todo, index) => {
+      return todo !== todoToToggle
+        ? todo
+        : Object.assign({}, todoToToggle, {
+            isCompleted: !todoToToggle.isCompleted
+          });
+    });
+    window.localStorage.removeItem(this.LOCAL_STORAGE_KEY);
+    window.localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(tt));
+    return tt;
   };
 
   private _toggleTodo = (todoToToggle: TodoItem) => {
     this.setState((prevState, props) => {
       return {
-        todos: prevState.todos.map((todo, index) => {
-          return todo !== todoToToggle
-            ? todo
-            : Object.assign({}, todoToToggle, {
-                isCompleted: !todoToToggle.isCompleted
-              });
-        })
+        todos: this.__toggle(prevState.todos, todoToToggle)
       };
     });
   };
