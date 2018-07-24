@@ -16,7 +16,10 @@ export default class App extends React.Component<any, IAppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      todos: [new TodoItem(1, "Lorem", false), new TodoItem(2, "Ipsum", true)]
+      todos: [
+        new TodoItem(1, "Start learning React", true),
+        new TodoItem(2, "Start learning Redux", false)
+      ]
     };
   }
 

@@ -43,14 +43,24 @@ export class OpenInfo extends React.Component {
           </svg>
           <div className="modal-content">
             <h1>Yeah! Todo</h1>
-            <p>- created by flashback2k14</p>
-            <p>- inspired by Listify - Simple Todo App</p>
+            <p>
+              - created by{" "}
+              <a href="https://github.com/flashback2k14" target="blank">
+                flashback2k14
+              </a>
+            </p>
+            <p>
+              - inspired by{" "}
+              <a
+                href="https://itunes.apple.com/de/app/listify-simple-todo-app/id1410668897?mt=8"
+                target="blank"
+              >
+                Listify - Simple Todo App
+              </a>
+            </p>
           </div>
         </div>
       </div>
     );
   }
 }
-
-// https://itunes.apple.com/de/app/listify-simple-todo-app/id1410668897?mt=8
-// https://github.com/flashback2k14

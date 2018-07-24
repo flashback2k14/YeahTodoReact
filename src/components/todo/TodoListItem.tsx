@@ -22,11 +22,12 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
 
     const todoItemCompleted = {
       color: "#9e9e9e",
+      fontStyle: "italic",
       textDecoration: "line-through"
     } as React.CSSProperties;
 
     const todoItem = {
-      fontWeight: "bold"
+      fontWeight: 500
     } as React.CSSProperties;
 
     return (

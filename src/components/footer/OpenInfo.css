@@ -61,3 +61,17 @@
 .modal_closed {
   display: none;
 }
+
+a {
+  text-decoration: none;
+  outline: none;
+}
+
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: gray;
+}
