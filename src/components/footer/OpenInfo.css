@@ -1,6 +1,12 @@
-.container {
+.container-info {
   position: fixed;
   left: 48px;
-  bottom: 24px;
-  /* border: solid 3px green; */
+  bottom: 30px;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.container-info:hover {
+  background: lavenderblush;
+  border-radius: 50%;
 }

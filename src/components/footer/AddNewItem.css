@@ -7,8 +7,13 @@
   align-content: center;
   position: fixed;
   right: 48px;
-  bottom: 30px;
-  /* border: solid 5px yellow; */
+  bottom: 24px;
+}
+
+.container_mod {
+  position: fixed;
+  left: 48px;
+  bottom: 24px;
 }
 
 .container-input {

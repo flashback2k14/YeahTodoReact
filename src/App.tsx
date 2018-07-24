@@ -18,7 +18,6 @@ export default class App extends React.Component<any, IAppState> {
     this.state = {
       todos: [new TodoItem(1, "Lorem", false), new TodoItem(2, "Ipsum", true)]
     };
-    console.log("app.ctor");
   }
 
   private _addTodo = (todo: TodoItem) => {
@@ -56,8 +55,7 @@ export default class App extends React.Component<any, IAppState> {
       display: "flex",
       justifyContent: "center",
       alignItems: "center",
-      borderRadius: "4px",
-      border: "solid 1px red"
+      borderRadius: "4px"
     } as React.CSSProperties;
 
     const gridItemStart = {

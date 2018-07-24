@@ -46,7 +46,7 @@ export class AddNewItem extends React.Component<
 
   public render() {
     return (
-      <div className="container">
+      <div className="container container_mod">
         <div
           className={
             this.state.showContainerInput
