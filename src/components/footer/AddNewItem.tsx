@@ -68,8 +68,8 @@ export class AddNewItem extends React.Component<
             </button>
           </div>
         </div>
-        <div className="container-fab">
-          <div className="fab" onClick={this._handleFabClick}>
+        <div className="container-fab" onClick={this._handleFabClick}>
+          <div className="fab">
             <div className="fab_icon">
               {this.state.showContainerInput ? (
                 <svg
