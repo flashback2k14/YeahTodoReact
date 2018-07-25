@@ -69,16 +69,3 @@ export class TodoList extends React.Component<ITodoListProps> {
     );
   }
 }
-
-// <ul style={todoList}>
-//   {this.props.items.map((item: TodoItem) => {
-//     return (
-//       <TodoListItem
-//         item={item}
-//         toggleFn={this.props.toggleFn}
-//         editFn={this.props.editFn}
-//         deleteFn={this.props.deleteFn}
-//       />
-//     );
-//   })}
-// </ul>

@@ -11,32 +11,39 @@ import TodoHelper from "./helper/TodoHelper";
 
 interface IAppState {
   todos: TodoItem[];
+  parentableTodos: TodoItem[];
 }
 
 export default class App extends React.Component<any, IAppState> {
   constructor(props: any) {
     super(props);
+    const tmpTodos = TodoHelper.getTodos();
     this.state = {
-      todos: TodoHelper.getTodos()
+      todos: tmpTodos,
+      parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
     };
   }
 
   private _addTodo = (todo: TodoItem) => {
     this.setState((prevState, props) => {
+      const tmpTodos = TodoHelper.add(
+        prevState.todos,
+        todo,
+        this.state.todos.length + 1
+      );
       return {
-        todos: TodoHelper.add(
-          prevState.todos,
-          todo,
-          this.state.todos.length + 1
-        )
+        todos: tmpTodos,
+        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
       };
     });
   };
 
   private _editTodo = (todoToEdit: TodoItem, value: string) => {
     this.setState((prevState, props) => {
+      const tmpTodos = TodoHelper.edit(prevState.todos, todoToEdit, value);
       return {
-        todos: TodoHelper.edit(prevState.todos, todoToEdit, value)
+        todos: tmpTodos,
+        parentableTodos: tmpTodos
       };
     });
   };
@@ -51,8 +58,10 @@ export default class App extends React.Component<any, IAppState> {
 
   private _deleteTodo = (todoToDelete: TodoItem) => {
     this.setState((prevState, props) => {
+      const tmpTodos = TodoHelper.delete(prevState.todos, todoToDelete);
       return {
-        todos: TodoHelper.delete(prevState.todos, todoToDelete)
+        todos: tmpTodos,
+        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
       };
     });
   };
@@ -114,7 +123,10 @@ export default class App extends React.Component<any, IAppState> {
         <div style={gridItem} />
         <div style={gridItem} />
         <div style={gridItem}>
-          <AddNewItem addTodoFn={this._addTodo} />
+          <AddNewItem
+            addTodoFn={this._addTodo}
+            parentableTodos={this.state.parentableTodos}
+          />
         </div>
       </div>
     );

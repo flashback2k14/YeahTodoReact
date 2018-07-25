@@ -19,6 +19,10 @@ export default class TodoHelper {
         ];
   };
 
+  public static getParentableTodos = (todos: TodoItem[]) => {
+    return todos.filter(todo => todo.parentItemId === -1);
+  };
+
   public static add = (todos: TodoItem[], todoToAdd: TodoItem, id: number) => {
     const tt = todos.concat([todoToAdd.setId(id)]);
     window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);

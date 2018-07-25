@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
@@ -20,11 +20,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
+  border-radius: 8px;
+  margin-bottom: 8px;
   transition: all 0.75s ease-in-out;
 }
 
 .container-input_hide {
-  width: 1px;
+  width: 0;
   opacity: 0;
 }
 
@@ -33,16 +36,53 @@
   opacity: 1;
 }
 
+.ttt {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 4px;
+  z-index: 20;
+}
+
+.container-chips {
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  background: white;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.chips {
+  border: black solid 1px;
+  color: black;
+  background: white;
+  border-radius: 4px;
+  margin: 4px;
+  padding: 4px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.chips_selected {
+  color: white;
+  background: black;
+}
+
+.chips:hover {
+  color: white;
+  background: black;
+}
+
 .container-input_add {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  margin-right: 8px;
+  width: calc(100%-8px);
   padding: 4px;
   background: white;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.6);
-  border-radius: 4px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
 }
 
 .todo-input {
@@ -54,6 +94,7 @@
   color: black;
   border: 0;
   border-bottom: 2px solid #616161;
+  border-top-left-radius: 4px;
   font-size: large;
   outline: none;
   z-index: 1000 !important;
@@ -76,6 +117,7 @@
 }
 
 .container-fab {
+  z-index: 200;
 }
 
 .fab {
