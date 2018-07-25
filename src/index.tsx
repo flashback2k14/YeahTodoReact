@@ -1,5 +1,8 @@
 import * as React from "react";
 import { render } from "react-dom";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import rootReducer from "./reducers";
 import App from "./App";
 
 // https://bitsofco.de/holy-grail-layout-css-grid/ // GRID LAYOUT
@@ -12,4 +15,11 @@ import App from "./App";
 // https://css-tricks.com/considerations-styling-modal/
 // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom
 
-render(<App />, document.getElementById("root"));
+const store = createStore(rootReducer);
+
+render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById("root")
+);

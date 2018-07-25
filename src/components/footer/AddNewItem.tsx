@@ -36,6 +36,9 @@ export class AddNewItem extends React.Component<
     if (!this.state.itemText) {
       return;
     }
+
+    console.log(this.state.selectParentTodoItemId);
+
     this.props.addTodoFn(
       new TodoItem(
         -1,
@@ -44,9 +47,7 @@ export class AddNewItem extends React.Component<
         this.state.selectParentTodoItemId
       )
     );
-    this.setState({ itemText: "", selectParentTodoItemId: -1 }, () =>
-      this._txtTodo.focus()
-    );
+    this.setState({ itemText: "" }, () => this._txtTodo.focus());
   };
 
   private _handleAddCompleted = (e: any) => {

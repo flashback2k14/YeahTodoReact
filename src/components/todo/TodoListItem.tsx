@@ -1,12 +1,15 @@
 import * as React from "react";
 import TodoItem from "../../models/TodoItem";
 import "./TodoListItem.css";
+import { toggleTodo } from "../../actions";
+import { connect } from "react-redux";
 
 interface ITodoItemProps {
   item: TodoItem;
   editFn: Function;
   toggleFn: Function;
   deleteFn: Function;
+  dispatch: Function;
 }
 
 interface ITodoItemState {
@@ -30,6 +33,7 @@ export class TodoListItem extends React.Component<
 
   private _handleChecked = () => {
     this.props.toggleFn(this.props.item);
+    // this.props.dispatch(toggleTodo(this.props.item));
   };
 
   private _handleEditMode = () => {
@@ -134,3 +138,5 @@ export class TodoListItem extends React.Component<
     );
   }
 }
+
+export default connect()(TodoListItem);
