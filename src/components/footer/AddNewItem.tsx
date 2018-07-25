@@ -37,6 +37,12 @@ export class AddNewItem extends React.Component<
     this.setState({ itemText: "" }, () => this._txtTodo.focus());
   };
 
+  private _handleAddCompleted = (e: any) => {
+    if (e.charCode === 13) {
+      this._handleAddClick();
+    }
+  };
+
   private _handleFabClick = () => {
     this.setState((prevState, props) => {
       return { showContainerInput: !prevState.showContainerInput };
@@ -63,6 +69,7 @@ export class AddNewItem extends React.Component<
               placeholder="Enter todo..."
               onChange={this._handleOnChange}
               value={this.state.itemText}
+              onKeyPress={this._handleAddCompleted}
             />
             <svg
               xmlns="http://www.w3.org/2000/svg"

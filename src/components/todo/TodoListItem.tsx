@@ -40,6 +40,12 @@ export class TodoListItem extends React.Component<
     });
   };
 
+  private _handleEditCompleted = (e: any) => {
+    if (e.charCode === 13) {
+      this._handleEditMode();
+    }
+  };
+
   private _handleDeleted = () => {
     this.props.deleteFn(this.props.item);
   };
@@ -84,6 +90,7 @@ export class TodoListItem extends React.Component<
                 className="todo-input_edit"
                 value={this.props.item.text}
                 onChange={this._handleEditChange}
+                onKeyPress={this._handleEditCompleted}
               />
             ) : (
               this.props.item.text
