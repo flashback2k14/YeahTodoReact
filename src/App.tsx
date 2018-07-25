@@ -33,6 +33,14 @@ export default class App extends React.Component<any, IAppState> {
     });
   };
 
+  private _editTodo = (todoToEdit: TodoItem, value: string) => {
+    this.setState((prevState, props) => {
+      return {
+        todos: TodoHelper.edit(prevState.todos, todoToEdit, value)
+      };
+    });
+  };
+
   private _toggleTodo = (todoToToggle: TodoItem) => {
     this.setState((prevState, props) => {
       return {
@@ -95,6 +103,7 @@ export default class App extends React.Component<any, IAppState> {
           <TodoList
             items={this.state.todos}
             toggleFn={this._toggleTodo}
+            editFn={this._editTodo}
             deleteFn={this._deleteTodo}
           />
         </div>

@@ -4,13 +4,40 @@ import "./TodoListItem.css";
 
 interface ITodoItemProps {
   item: TodoItem;
+  editFn: Function;
   toggleFn: Function;
   deleteFn: Function;
 }
 
-export class TodoListItem extends React.Component<ITodoItemProps, any> {
+interface ITodoItemState {
+  inEditMode: boolean;
+}
+
+export class TodoListItem extends React.Component<
+  ITodoItemProps,
+  ITodoItemState
+> {
+  constructor(props: ITodoItemProps) {
+    super(props);
+    this.state = {
+      inEditMode: false
+    };
+  }
+
+  private _handleEditChange = (e: any) => {
+    this.props.editFn(this.props.item, e.target.value);
+  };
+
   private _handleChecked = () => {
     this.props.toggleFn(this.props.item);
+  };
+
+  private _handleEditMode = () => {
+    this.setState(prevState => {
+      return {
+        inEditMode: !prevState.inEditMode
+      };
+    });
   };
 
   private _handleDeleted = () => {
@@ -35,6 +62,10 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
       cursor: "default"
     } as React.CSSProperties;
 
+    const containerTodoItemText = {
+      width: "100%"
+    };
+
     const containerTodoItemButtons = {
       display: "flex",
       justifyContent: "center",
@@ -47,7 +78,17 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
         style={this.props.item.isCompleted ? todoItemCompleted : todoItem}
       >
         <div style={containerTodoItem}>
-          {this.props.item.text}
+          <div style={containerTodoItemText}>
+            {this.state.inEditMode ? (
+              <input
+                className="todo-input_edit"
+                value={this.props.item.text}
+                onChange={this._handleEditChange}
+              />
+            ) : (
+              this.props.item.text
+            )}
+          </div>
           <div style={containerTodoItemButtons}>
             <label className="checkbox_label">
               <input
@@ -57,6 +98,17 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
                 defaultChecked={this.props.item.isCompleted}
               />
             </label>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="black"
+              className="edit"
+              onClick={this._handleEditMode}
+            >
+              <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
+            </svg>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -70,6 +122,7 @@ export class TodoListItem extends React.Component<ITodoItemProps, any> {
             </svg>
           </div>
         </div>
+        <hr className="ruler" />
       </li>
     );
   }

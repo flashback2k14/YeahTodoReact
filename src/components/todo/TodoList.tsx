@@ -5,13 +5,14 @@ import TodoItem from "../../models/TodoItem";
 interface ITodoListProps {
   items: TodoItem[];
   toggleFn: Function;
+  editFn: Function;
   deleteFn: Function;
 }
 
 export class TodoList extends React.Component<ITodoListProps> {
   public render() {
     const container = {
-      width: "80%",
+      width: "100vw",
       minHeight: "20%",
       padding: "8px 20px 0 8px",
       borderRadius: "8px",
@@ -49,6 +50,7 @@ export class TodoList extends React.Component<ITodoListProps> {
               <TodoListItem
                 item={item}
                 toggleFn={this.props.toggleFn}
+                editFn={this.props.editFn}
                 deleteFn={this.props.deleteFn}
               />
             );

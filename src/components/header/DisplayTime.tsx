@@ -13,6 +13,9 @@ export class DisplayTime extends React.Component<any, IDisplayTimeState> {
     this.state = {
       time: new Date()
     };
+  }
+
+  public componentDidMount() {
     this._timer = window.setInterval(() => {
       this.setState({
         time: new Date()

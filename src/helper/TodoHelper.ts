@@ -41,6 +41,26 @@ export default class TodoHelper {
     return tt;
   };
 
+  public static edit = (
+    todos: TodoItem[],
+    todoToEdit: TodoItem,
+    value: string
+  ) => {
+    const tt = todos.map(todo => {
+      return todo !== todoToEdit
+        ? todo
+        : Object.assign({}, todoToEdit, {
+            text: value
+          });
+    });
+    window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
+    window.localStorage.setItem(
+      TodoHelper.LOCAL_STORAGE_KEY,
+      JSON.stringify(tt)
+    );
+    return tt;
+  };
+
   public static delete = (todos: TodoItem[], todoToDelete: TodoItem) => {
     const tt = todos.filter(todo => todo.id !== todoToDelete.id);
     window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
