@@ -43,7 +43,7 @@ export default class App extends React.Component<any, IAppState> {
       const tmpTodos = TodoHelper.edit(prevState.todos, todoToEdit, value);
       return {
         todos: tmpTodos,
-        parentableTodos: tmpTodos
+        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
       };
     });
   };
