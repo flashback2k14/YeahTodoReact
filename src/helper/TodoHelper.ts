@@ -10,8 +10,12 @@ export default class TodoHelper {
     return savedTodosString
       ? JSON.parse(savedTodosString)
       : [
-          new TodoItem(1, "Start learning React", true),
-          new TodoItem(2, "Start learning Redux", false)
+          new TodoItem(1, "Start learning React", true, -1),
+          new TodoItem(3, "State", true, 1),
+          new TodoItem(4, "Props", true, 1),
+          new TodoItem(2, "Start learning Redux", false, -1),
+          new TodoItem(5, "Actions", false, 2),
+          new TodoItem(6, "Reducer", false, 2)
         ];
   };
 
