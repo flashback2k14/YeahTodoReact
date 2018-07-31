@@ -1,15 +1,14 @@
 import * as React from "react";
-import { TodoListItem } from "./TodoListItem";
-import TodoItem from "../../models/TodoItem";
+// import TodoItem from "../../models/TodoItem";
 
-interface ITodoListProps {
-  items: TodoItem[];
-  toggleFn: Function;
-  editFn: Function;
-  deleteFn: Function;
-}
+// interface ITodoListProps {
+//   items: TodoItem[];
+//   toggleFn: Function;
+//   editFn: Function;
+//   deleteFn: Function;
+// }
 
-export class TodoList extends React.Component<ITodoListProps> {
+export class TodoList extends React.Component {
   public render() {
     const container = {
       width: "100vw",
@@ -44,28 +43,30 @@ export class TodoList extends React.Component<ITodoListProps> {
     return (
       <div style={container}>
         <div style={headline}>To Do</div>
-        <ul style={todoList}>
-          {this.props.items.map((item: TodoItem) => {
-            return item.parentItemId === -1 ? (
-              <TodoListItem
-                item={item}
-                toggleFn={this.props.toggleFn}
-                editFn={this.props.editFn}
-                deleteFn={this.props.deleteFn}
-              />
-            ) : (
-              <ul>
-                <TodoListItem
-                  item={item}
-                  toggleFn={this.props.toggleFn}
-                  editFn={this.props.editFn}
-                  deleteFn={this.props.deleteFn}
-                />
-              </ul>
-            );
-          })}
-        </ul>
+        <ul style={todoList}>{this.props.children}</ul>
       </div>
     );
   }
 }
+
+// <ul style={todoList}>
+// {this.props.items.map((item: TodoItem) => {
+//   return item.parentItemId === -1 ? (
+//     <TodoListItem
+//       item={item}
+//       toggleFn={this.props.toggleFn}
+//       editFn={this.props.editFn}
+//       deleteFn={this.props.deleteFn}
+//     />
+//   ) : (
+//       <ul>
+//         <TodoListItem
+//           item={item}
+//           toggleFn={this.props.toggleFn}
+//           editFn={this.props.editFn}
+//           deleteFn={this.props.deleteFn}
+//         />
+//       </ul>
+//     );
+// })}
+// </ul>

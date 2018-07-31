@@ -13,7 +13,7 @@ interface IAddNewItemState {
   selectParentTodoItemId: number;
 }
 
-export class AddNewItem extends React.Component<
+export default class AddNewItem extends React.Component<
   IAddNewItemProps,
   IAddNewItemState
 > {
@@ -36,9 +36,6 @@ export class AddNewItem extends React.Component<
     if (!this.state.itemText) {
       return;
     }
-
-    console.log(this.state.selectParentTodoItemId);
-
     this.props.addTodoFn(
       new TodoItem(
         -1,

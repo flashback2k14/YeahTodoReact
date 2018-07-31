@@ -11,6 +11,11 @@ export default class TodoItem {
     return this;
   }
 
+  public setText(text: string): TodoItem {
+    this.text = text;
+    return this;
+  }
+
   setParent(parentItemId: number): TodoItem {
     this.parentItemId = parentItemId;
     return this;

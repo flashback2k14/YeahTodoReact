@@ -1,71 +1,21 @@
 import * as React from "react";
-import {
-  AddNewItem,
-  DisplayDate,
-  DisplayTime,
-  OpenInfo,
-  TodoList
-} from "./components";
-import TodoItem from "./models/TodoItem";
-import TodoHelper from "./helper/TodoHelper";
+import { DisplayDate, DisplayTime, OpenInfo, TodoList } from "./components";
 
-interface IAppState {
+import TodoListItemContainer from "./containers/todo/TodoListItemContainer";
+import AddNewItemContainer from "./containers/footer/AddNewItemContainer";
+
+import TodoItem from "./models/TodoItem";
+
+interface IAppProps {
   todos: TodoItem[];
   parentableTodos: TodoItem[];
+  addTodoFn: Function;
+  editFn: Function;
+  toggleFn: Function;
+  deleteFn: Function;
 }
 
-export default class App extends React.Component<any, IAppState> {
-  constructor(props: any) {
-    super(props);
-    const tmpTodos = TodoHelper.getTodos();
-    this.state = {
-      todos: tmpTodos,
-      parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
-    };
-  }
-
-  private _addTodo = (todo: TodoItem) => {
-    this.setState((prevState, props) => {
-      const tmpTodos = TodoHelper.add(
-        prevState.todos,
-        todo,
-        this.state.todos.length + 1
-      );
-      return {
-        todos: tmpTodos,
-        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
-      };
-    });
-  };
-
-  private _editTodo = (todoToEdit: TodoItem, value: string) => {
-    this.setState((prevState, props) => {
-      const tmpTodos = TodoHelper.edit(prevState.todos, todoToEdit, value);
-      return {
-        todos: tmpTodos,
-        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
-      };
-    });
-  };
-
-  private _toggleTodo = (todoToToggle: TodoItem) => {
-    this.setState((prevState, props) => {
-      return {
-        todos: TodoHelper.toggle(prevState.todos, todoToToggle)
-      };
-    });
-  };
-
-  private _deleteTodo = (todoToDelete: TodoItem) => {
-    this.setState((prevState, props) => {
-      const tmpTodos = TodoHelper.delete(prevState.todos, todoToDelete);
-      return {
-        todos: tmpTodos,
-        parentableTodos: TodoHelper.getParentableTodos(tmpTodos)
-      };
-    });
-  };
-
+export default class App extends React.Component<IAppProps> {
   public render() {
     const gridContainer = {
       display: "grid",
@@ -109,12 +59,27 @@ export default class App extends React.Component<any, IAppState> {
             ...gridColSpan2
           }}
         >
-          <TodoList
-            items={this.state.todos}
-            toggleFn={this._toggleTodo}
-            editFn={this._editTodo}
-            deleteFn={this._deleteTodo}
-          />
+          <TodoList>
+            {this.props.todos.map((item: TodoItem) => {
+              return item.parentItemId === -1 ? (
+                <TodoListItemContainer
+                  item={item}
+                  toggleFn={this.props.toggleFn}
+                  editFn={this.props.editFn}
+                  deleteFn={this.props.deleteFn}
+                />
+              ) : (
+                <ul>
+                  <TodoListItemContainer
+                    item={item}
+                    toggleFn={this.props.toggleFn}
+                    editFn={this.props.editFn}
+                    deleteFn={this.props.deleteFn}
+                  />
+                </ul>
+              );
+            })}
+          </TodoList>
         </div>
         <div style={gridItem} />
         <div style={gridItem}>
@@ -123,9 +88,9 @@ export default class App extends React.Component<any, IAppState> {
         <div style={gridItem} />
         <div style={gridItem} />
         <div style={gridItem}>
-          <AddNewItem
-            addTodoFn={this._addTodo}
-            parentableTodos={this.state.parentableTodos}
+          <AddNewItemContainer
+            addTodoFn={this.props.addTodoFn}
+            parentableTodos={this.props.parentableTodos}
           />
         </div>
       </div>

@@ -3,12 +3,12 @@ import TodoItem from "../models/TodoItem";
 export default class TodoHelper {
   private static readonly LOCAL_STORAGE_KEY = "YeahToDo";
 
-  public static getTodos = () => {
+  public static getTodos = (): TodoItem[] => {
     const savedTodosString = window.localStorage.getItem(
       TodoHelper.LOCAL_STORAGE_KEY
     );
     return savedTodosString
-      ? JSON.parse(savedTodosString)
+      ? (JSON.parse(savedTodosString) as TodoItem[])
       : [
           new TodoItem(1, "Start learning React", true, -1),
           new TodoItem(3, "State", true, 1),
@@ -19,7 +19,7 @@ export default class TodoHelper {
         ];
   };
 
-  public static getParentableTodos = (todos: TodoItem[]) => {
+  public static getParentableTodos = (todos: TodoItem[]): TodoItem[] => {
     return todos.filter(todo => todo.parentItemId === -1);
   };
 
@@ -77,5 +77,13 @@ export default class TodoHelper {
       JSON.stringify(tt)
     );
     return tt;
+  };
+
+  public static save = (todos: TodoItem[]): void => {
+    window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
+    window.localStorage.setItem(
+      TodoHelper.LOCAL_STORAGE_KEY,
+      JSON.stringify(todos)
+    );
   };
 }
