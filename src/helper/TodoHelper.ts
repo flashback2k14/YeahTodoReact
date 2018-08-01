@@ -3,6 +3,12 @@ import TodoItem from "../models/TodoItem";
 export default class TodoHelper {
   private static readonly LOCAL_STORAGE_KEY = "YeahToDo";
 
+  private static _getNextId = (todos: TodoItem[]): number => {
+    return todos.length > 0
+      ? Math.max(...todos.map((todo: TodoItem) => todo.id)) + 1
+      : 1;
+  };
+
   private static _save = (todos: TodoItem[]): void => {
     window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
     window.localStorage.setItem(
@@ -23,7 +29,10 @@ export default class TodoHelper {
   };
 
   public static add = (todos: TodoItem[], todoToAdd: TodoItem): TodoItem[] => {
-    const changedTodos = [...todos, todoToAdd.setId(todos.length + 1)];
+    const changedTodos = [
+      ...todos,
+      todoToAdd.setId(TodoHelper._getNextId(todos))
+    ];
     TodoHelper._save(changedTodos);
     return changedTodos;
   };
