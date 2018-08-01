@@ -26,8 +26,7 @@ export const initialState: IState = {
 export function reducer(state: IState = initialState, action: ActionType) {
   switch (action.type) {
     case ActionTypes.ADD_TODO: {
-      const changedTodos = [...state.todos, action.payload.todo];
-      TodoHelper.save(changedTodos);
+      const changedTodos = TodoHelper.add(state.todos, action.payload.todo);
       return {
         ...state,
         todos: changedTodos,
@@ -36,13 +35,7 @@ export function reducer(state: IState = initialState, action: ActionType) {
     }
 
     case ActionTypes.TOGGLE_TODO: {
-      const changedTodos = state.todos.map(
-        (todo: TodoItem) =>
-          todo.id === action.payload.todo.id
-            ? ({ ...todo, isCompleted: !todo.isCompleted } as TodoItem)
-            : todo
-      );
-      TodoHelper.save(changedTodos);
+      const changedTodos = TodoHelper.toggle(state.todos, action.payload.todo);
       return {
         ...state,
         todos: changedTodos,
@@ -51,13 +44,11 @@ export function reducer(state: IState = initialState, action: ActionType) {
     }
 
     case ActionTypes.EDIT_TODO: {
-      const changedTodos = state.todos.map(
-        (todo: TodoItem) =>
-          todo.id === action.payload.todo.id
-            ? ({ ...todo, text: action.payload.changedValue } as TodoItem)
-            : todo
+      const changedTodos = TodoHelper.edit(
+        state.todos,
+        action.payload.todo,
+        action.payload.changedValue
       );
-      TodoHelper.save(changedTodos);
       return {
         ...state,
         todos: changedTodos,
@@ -66,10 +57,7 @@ export function reducer(state: IState = initialState, action: ActionType) {
     }
 
     case ActionTypes.DELETE_TODO: {
-      const changedTodos = state.todos.filter(
-        (todo: TodoItem) => todo.id !== action.payload.todo.id
-      );
-      TodoHelper.save(changedTodos);
+      const changedTodos = TodoHelper.delete(state.todos, action.payload.todo);
       return {
         ...state,
         todos: changedTodos,

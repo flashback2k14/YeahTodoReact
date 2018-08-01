@@ -1,14 +1,16 @@
+import { padLeft } from "../helper/Helper";
+
 export default class DisplayDateModel {
   private _monthFormatter = new Intl.DateTimeFormat("de-DE", {
     month: "long"
   });
 
-  readonly day: number;
+  readonly day: string;
   readonly month: string;
   readonly year: number;
 
   private constructor(currentDate: Date) {
-    this.day = currentDate.getDate();
+    this.day = padLeft(currentDate.getDate());
     this.month = this._monthFormatter.format(currentDate);
     this.year = currentDate.getFullYear();
   }

@@ -15,6 +15,28 @@ interface IAppProps {
 }
 
 export default class App extends React.Component<IAppProps> {
+  private _displayTodos = () => {
+    return this.props.parentableTodos.map((parentTodo: TodoItem) => {
+      const childTodos = this.props.todos.filter((todo: TodoItem) => {
+        return parentTodo.id === todo.parentItemId;
+      });
+      return childTodos ? (
+        <div>
+          <TodoListItemContainer key={parentTodo.id} item={parentTodo} />
+          <ul>
+            {childTodos.map((childTodo: TodoItem) => {
+              return (
+                <TodoListItemContainer key={childTodo.id} item={childTodo} />
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <TodoListItemContainer key={parentTodo.id} item={parentTodo} />
+      );
+    });
+  };
+
   public render() {
     return (
       <div style={AppStyles.gridContainer()}>
@@ -34,17 +56,7 @@ export default class App extends React.Component<IAppProps> {
             ...AppStyles.gridColSpan2()
           }}
         >
-          <TodoList>
-            {this.props.todos.map((item: TodoItem) => {
-              return item.parentItemId === -1 ? (
-                <TodoListItemContainer item={item} />
-              ) : (
-                <ul>
-                  <TodoListItemContainer item={item} />
-                </ul>
-              );
-            })}
-          </TodoList>
+          <TodoList>{this._displayTodos()}</TodoList>
         </div>
         <div style={AppStyles.gridItem()} />
         <div style={AppStyles.gridItem()}>
