@@ -18,6 +18,7 @@ export default class AddNewItem extends React.Component<
   IAddNewItemState
 > {
   private _txtTodo: any;
+  private _selectedChip: any;
 
   constructor(props: IAddNewItemProps) {
     super(props);
@@ -36,6 +37,7 @@ export default class AddNewItem extends React.Component<
     if (!this.state.itemText) {
       return;
     }
+
     this.props.addTodoFn(
       new TodoItem(
         -1,
@@ -44,7 +46,19 @@ export default class AddNewItem extends React.Component<
         this.state.selectParentTodoItemId
       )
     );
-    this.setState({ itemText: "" }, () => this._txtTodo.focus());
+
+    this.setState(
+      {
+        itemText: "",
+        selectParentTodoItemId: -1
+      },
+      () => {
+        this._txtTodo.focus();
+        if (this._selectedChip) {
+          this._selectedChip.classList.toggle("chips_selected");
+        }
+      }
+    );
   };
 
   private _handleAddCompleted = (e: any) => {
@@ -54,11 +68,13 @@ export default class AddNewItem extends React.Component<
   };
 
   private _handleChipSelection = (e: any, todo: TodoItem) => {
+    this._selectedChip = e.target;
+
     if (this.state.selectParentTodoItemId === todo.id) {
       this.setState({
         selectParentTodoItemId: -1
       });
-      e.target.classList.toggle("chips_selected");
+      this._selectedChip.classList.toggle("chips_selected");
       return;
     }
 
@@ -69,14 +85,22 @@ export default class AddNewItem extends React.Component<
     this.setState({
       selectParentTodoItemId: todo.id
     });
-    e.target.classList.toggle("chips_selected");
+
+    this._selectedChip.classList.toggle("chips_selected");
   };
 
   private _handleFabClick = () => {
-    this.setState((prevState, props) => {
-      return { showContainerInput: !prevState.showContainerInput };
-    });
-    this._txtTodo.focus();
+    this.setState(
+      (prevState, props) => {
+        return {
+          showContainerInput: !prevState.showContainerInput,
+          selectParentTodoItemId: -1
+        };
+      },
+      () => {
+        this._txtTodo.focus();
+      }
+    );
   };
 
   public render() {
@@ -158,10 +182,3 @@ export default class AddNewItem extends React.Component<
     );
   }
 }
-
-// <fieldset>
-//   <div>
-//     <input type="radio" name={todo.text} />
-//     <label htmlFor={todo.text}>{todo.text}</label>
-//   </div>
-// </fieldset>

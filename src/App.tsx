@@ -22,17 +22,26 @@ export default class App extends React.Component<IAppProps> {
       });
       return childTodos ? (
         <div>
-          <TodoListItemContainer key={parentTodo.id} item={parentTodo} />
+          <TodoListItemContainer
+            key={parentTodo.id.toString()}
+            item={parentTodo}
+          />
           <ul>
             {childTodos.map((childTodo: TodoItem) => {
               return (
-                <TodoListItemContainer key={childTodo.id} item={childTodo} />
+                <TodoListItemContainer
+                  key={childTodo.id.toString()}
+                  item={childTodo}
+                />
               );
             })}
           </ul>
         </div>
       ) : (
-        <TodoListItemContainer key={parentTodo.id} item={parentTodo} />
+        <TodoListItemContainer
+          key={parentTodo.id.toString()}
+          item={parentTodo}
+        />
       );
     });
   };

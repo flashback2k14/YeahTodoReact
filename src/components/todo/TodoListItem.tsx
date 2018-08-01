@@ -79,10 +79,7 @@ export default class TodoListItem extends React.Component<
     } as React.CSSProperties;
 
     return (
-      <li
-        key={this.props.item.id}
-        style={this.props.item.isCompleted ? todoItemCompleted : todoItem}
-      >
+      <li style={this.props.item.isCompleted ? todoItemCompleted : todoItem}>
         <div style={containerTodoItem}>
           <div style={containerTodoItemText}>
             {this.state.inEditMode ? (

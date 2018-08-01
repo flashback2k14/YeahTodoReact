@@ -23,7 +23,7 @@ export default class TodoHelper {
   };
 
   public static add = (todos: TodoItem[], todoToAdd: TodoItem): TodoItem[] => {
-    const changedTodos = [...todos, todoToAdd];
+    const changedTodos = [...todos, todoToAdd.setId(todos.length + 1)];
     TodoHelper._save(changedTodos);
     return changedTodos;
   };

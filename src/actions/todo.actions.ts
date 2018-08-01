@@ -1,7 +1,5 @@
 import TodoItem from "../models/TodoItem";
 
-let nextTodoId = 0;
-
 /**
  * Define every action name constant here
  */
@@ -43,7 +41,7 @@ export function addTodo(todoToAdd: TodoItem): IAddTodoAction {
   return {
     type: ActionTypes.ADD_TODO,
     payload: {
-      todo: todoToAdd.setId(++nextTodoId)
+      todo: todoToAdd
     }
   };
 }
