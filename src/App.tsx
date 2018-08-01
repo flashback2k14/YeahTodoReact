@@ -15,7 +15,7 @@ interface IAppProps {
 }
 
 export default class App extends React.Component<IAppProps> {
-  private _displayTodos = () => {
+  private _getTodoListItems = () => {
     return this.props.parentableTodos.map((parentTodo: TodoItem) => {
       const childTodos = this.props.todos.filter((todo: TodoItem) => {
         return parentTodo.id === todo.parentItemId;
@@ -56,7 +56,7 @@ export default class App extends React.Component<IAppProps> {
             ...AppStyles.gridColSpan2()
           }}
         >
-          <TodoList>{this._displayTodos()}</TodoList>
+          <TodoList>{this._getTodoListItems()}</TodoList>
         </div>
         <div style={AppStyles.gridItem()} />
         <div style={AppStyles.gridItem()}>
