@@ -1,12 +1,4 @@
 import * as React from "react";
-// import TodoItem from "../../models/TodoItem";
-
-// interface ITodoListProps {
-//   items: TodoItem[];
-//   toggleFn: Function;
-//   editFn: Function;
-//   deleteFn: Function;
-// }
 
 export class TodoList extends React.Component {
   public render() {
@@ -48,25 +40,3 @@ export class TodoList extends React.Component {
     );
   }
 }
-
-// <ul style={todoList}>
-// {this.props.items.map((item: TodoItem) => {
-//   return item.parentItemId === -1 ? (
-//     <TodoListItem
-//       item={item}
-//       toggleFn={this.props.toggleFn}
-//       editFn={this.props.editFn}
-//       deleteFn={this.props.deleteFn}
-//     />
-//   ) : (
-//       <ul>
-//         <TodoListItem
-//           item={item}
-//           toggleFn={this.props.toggleFn}
-//           editFn={this.props.editFn}
-//           deleteFn={this.props.deleteFn}
-//         />
-//       </ul>
-//     );
-// })}
-// </ul>

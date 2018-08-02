@@ -77,9 +77,9 @@ export default class TodoHelper {
     todos: TodoItem[],
     todoToDelete: TodoItem
   ): TodoItem[] => {
-    const changedTodos = todos.filter(
-      (todo: TodoItem) => todo.id !== todoToDelete.id
-    );
+    const changedTodos = todos
+      .filter((todo: TodoItem) => todo.id !== todoToDelete.id)
+      .filter((todo: TodoItem) => todo.parentItemId !== todoToDelete.id);
     TodoHelper._save(changedTodos);
     return changedTodos;
   };
