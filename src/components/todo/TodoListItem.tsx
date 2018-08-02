@@ -99,7 +99,7 @@ export default class TodoListItem extends React.Component<
                 type="checkbox"
                 className="checkbox"
                 onClick={this._handleChecked}
-                defaultChecked={this.props.item.isCompleted}
+                checked={this.props.item.isCompleted}
               />
             </label>
             <svg
