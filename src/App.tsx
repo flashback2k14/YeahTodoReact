@@ -16,37 +16,6 @@ interface IAppProps {
 }
 
 export default class App extends React.Component<IAppProps> {
-  private _getTodoListItems = () => {
-    return this.props.parentableTodos.map((parentTodo: TodoItem) => {
-      const childTodos = this.props.todos.filter((todo: TodoItem) => {
-        return parentTodo.id === todo.parentItemId;
-      });
-      return childTodos ? (
-        <div>
-          <TodoListItemContainer
-            key={parentTodo.id.toString()}
-            item={parentTodo}
-          />
-          <ul>
-            {childTodos.map((childTodo: TodoItem) => {
-              return (
-                <TodoListItemContainer
-                  key={childTodo.id.toString()}
-                  item={childTodo}
-                />
-              );
-            })}
-          </ul>
-        </div>
-      ) : (
-        <TodoListItemContainer
-          key={parentTodo.id.toString()}
-          item={parentTodo}
-        />
-      );
-    });
-  };
-
   public render() {
     return (
       <div style={AppStyles.gridContainer()}>
@@ -80,4 +49,35 @@ export default class App extends React.Component<IAppProps> {
       </div>
     );
   }
+
+  private _getTodoListItems = () => {
+    return this.props.parentableTodos.map((parentTodo: TodoItem) => {
+      const childTodos = this.props.todos.filter((todo: TodoItem) => {
+        return parentTodo.id === todo.parentItemId;
+      });
+      return childTodos ? (
+        <div>
+          <TodoListItemContainer
+            key={parentTodo.id.toString()}
+            item={parentTodo}
+          />
+          <ul>
+            {childTodos.map((childTodo: TodoItem) => {
+              return (
+                <TodoListItemContainer
+                  key={childTodo.id.toString()}
+                  item={childTodo}
+                />
+              );
+            })}
+          </ul>
+        </div>
+      ) : (
+        <TodoListItemContainer
+          key={parentTodo.id.toString()}
+          item={parentTodo}
+        />
+      );
+    });
+  };
 }

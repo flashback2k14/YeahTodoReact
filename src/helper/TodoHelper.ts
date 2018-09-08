@@ -3,20 +3,6 @@ import TodoItem from "../models/TodoItem";
 export default class TodoHelper {
   private static readonly LOCAL_STORAGE_KEY = "YeahToDo";
 
-  private static _getNextId = (todos: TodoItem[]): number => {
-    return todos.length > 0
-      ? Math.max(...todos.map((todo: TodoItem) => todo.id)) + 1
-      : 1;
-  };
-
-  private static _save = (todos: TodoItem[]): void => {
-    window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
-    window.localStorage.setItem(
-      TodoHelper.LOCAL_STORAGE_KEY,
-      JSON.stringify(todos)
-    );
-  };
-
   public static getTodos = (): TodoItem[] => {
     const savedTodosString = window.localStorage.getItem(
       TodoHelper.LOCAL_STORAGE_KEY
@@ -82,5 +68,19 @@ export default class TodoHelper {
       .filter((todo: TodoItem) => todo.parentItemId !== todoToDelete.id);
     TodoHelper._save(changedTodos);
     return changedTodos;
+  };
+
+  private static _getNextId = (todos: TodoItem[]): number => {
+    return todos.length > 0
+      ? Math.max(...todos.map((todo: TodoItem) => todo.id)) + 1
+      : 1;
+  };
+
+  private static _save = (todos: TodoItem[]): void => {
+    window.localStorage.removeItem(TodoHelper.LOCAL_STORAGE_KEY);
+    window.localStorage.setItem(
+      TodoHelper.LOCAL_STORAGE_KEY,
+      JSON.stringify(todos)
+    );
   };
 }
