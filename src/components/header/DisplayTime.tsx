@@ -32,7 +32,8 @@ export class DisplayTime extends React.Component<any, IDisplayTimeState> {
 
     const styling = {
       fontWeight: "bold",
-      fontSize: "2em"
+      fontSize: "2em",
+      marginRight: 16
     } as React.CSSProperties;
 
     return <div style={styling}>{Helper.getTimeString(time)}</div>;

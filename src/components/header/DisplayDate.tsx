@@ -20,7 +20,8 @@ export class DisplayDate extends React.Component<any, IDisplayDateState> {
       flexWrap: "nowrap",
       justifyContent: "center",
       alignItems: "center",
-      alignContent: "stretch"
+      alignContent: "stretch",
+      marginLeft: 32
     } as React.CSSProperties;
 
     const flexChildContainer = {

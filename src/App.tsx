@@ -4,6 +4,7 @@ import AddNewItemContainer from "./containers/footer/AddNewItemContainer";
 import TodoListItemContainer from "./containers/todo/TodoListItemContainer";
 import TodoItem from "./models/TodoItem";
 import AppStyles from "./App.styles";
+import "./global.css";
 
 interface IAppProps {
   todos: TodoItem[];
