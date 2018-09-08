@@ -24,7 +24,7 @@
     "@types/react-dom": "16.0.4",
     "@types/react-redux": "6.0.5",
     "@types/redux-logger": "3.0.6",
-    "typescript": "^2.7.2"
+    "typescript": "2.8.3"
   },
   "keywords": [],
   "description": "",
