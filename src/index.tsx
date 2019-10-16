@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import AppContainer from "./containers/AppContainer";
 import store from "./store/index";
-import registerServiceWorker from "./registerServiceWorker";
+import { register } from "./serviceWorker";
 
 render(
   <Provider store={store}>
@@ -11,4 +11,5 @@ render(
   </Provider>,
   document.getElementById("root")
 );
-registerServiceWorker();
+
+register();

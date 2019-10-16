@@ -21,7 +21,7 @@ const mapDispatchToProps = {
   deleteFn: deleteTodo
 };
 
-export default connect<any, any, any>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(App);

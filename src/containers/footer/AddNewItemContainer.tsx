@@ -12,7 +12,7 @@ const mapDispatchToProps = {
   addTodoFn: addTodo
 };
 
-export default connect<any, any, any>(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(AddNewItem);

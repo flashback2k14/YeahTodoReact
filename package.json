@@ -1,35 +1,43 @@
 {
   "name": "yeah-todo",
-  "version": "0.5.0",
+  "version": "1.0.0",
+  "author": "flashback2k14",
   "private": true,
-  "main": "src/index.tsx",
   "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-redux": "5.0.7",
-    "react-scripts-ts": "^2.13.0",
-    "redux": "4.0.0",
-    "reselect": "3.0.1"
+    "@types/jest": "24.0.19",
+    "@types/node": "12.11.1",
+    "@types/react": "16.9.8",
+    "@types/react-dom": "16.9.2",
+    "@types/react-redux": "7.1.4",
+    "@types/redux-logger": "3.0.7",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "7.1.1",
+    "react-scripts": "3.2.0",
+    "redux": "4.0.4",
+    "reselect": "4.0.0",
+    "typescript": "3.6.4"
   },
   "scripts": {
-    "start": "react-scripts-ts start",
-    "build": "react-scripts-ts build",
-    "test": "react-scripts-ts test --env=jsdom",
-    "eject": "react-scripts-ts eject"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "deploy": "npm run build && npx now --prod ."
   },
-  "devDependencies": {
-    "@types/jest": "^22.1.3",
-    "@types/node": "^9.4.6",
-    "@types/react": "16.0.38",
-    "@types/react-dom": "16.0.4",
-    "@types/react-redux": "6.0.5",
-    "@types/redux-logger": "3.0.6",
-    "typescript": "^2.7.2"
+  "eslintConfig": {
+    "extends": "react-app"
   },
-  "keywords": [],
-  "description": "",
-  "now": {
-    "name": "yeah-todo"
-  },
-  "author": "flashback2k14"
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
