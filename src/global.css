@@ -17,55 +17,54 @@ body {
   grid-template-rows: 72px 1fr 48px;
   min-height: 100vh;
   grid-template-areas: 
-    "header1 header2 header3 header4"
-    "content1 content2 content2 content3"
-    "footer1 footer2 footer3 footer4";
+    "headerL headerCL headerCR headerR"
+    "contentL contentC contentC contentR"
+    "footerL footerCL footerCR footerR";
   margin: 8px 8px 0 8px;
 }
 
 .header-row_1{
-  grid-area: header1;
+  grid-area: headerL;
 }
 .header-row_2 {
-  grid-area: header2;
+  grid-area: headerCL;
 }
 .header-row_3 {
-  grid-area: header3;
+  grid-area: headerCR;
 }
 .header-row_4 {
-  grid-area: header4;
+  grid-area: headerR;
 }
 
 .content-row_1{
-  grid-area: content1;
+  grid-area: contentL;
 }
 .content-row_2 {
-  grid-area: content2;
+  grid-area: contentC;
 }
 .content-row_3 {
-  grid-area: content3;
+  grid-area: contentR;
 }
 
 .footer-row_1{
-  grid-area: footer1;
+  grid-area: footerL;
 }
 .footer-row_2 {
-  grid-area: footer2;
+  grid-area: footerCL;
 }
 .footer-row_3 {
-  grid-area: footer3;
+  grid-area: footerCR;
 }
 .footer-row_4 {
-  grid-area: footer4;
+  grid-area: footerR;
 }
 
-
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 768px) {
   .grid-container {
     grid-template-areas: 
-      "header1 header2 header3 header4"
-      "content2 content2 content2 content2"
-      "footer1 footer2 footer3 footer4";
+      "headerL headerCL headerCR headerR"
+      "contentC contentC contentC contentC"
+      "footerL footerCL footerCR footerR";
     margin: 8px;
   }
 }
