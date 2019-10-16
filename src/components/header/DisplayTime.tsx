@@ -13,6 +13,7 @@ export class DisplayTime extends React.Component<any, IDisplayTimeState> {
     this.state = {
       time: new Date()
     };
+    this._timer = -1;
   }
 
   public componentDidMount() {
