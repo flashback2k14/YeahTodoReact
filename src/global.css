@@ -10,3 +10,33 @@ body {
   padding: 0;
   background: #eeeeee;
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 104px 1fr 1fr 104px;
+  grid-template-rows: 72px 1fr 48px;
+  grid-gap: 5px;
+  min-height: 100vh;
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.grid-item_start {
+  align-items: flex-start;
+  padding-top: 16px;
+}
+
+.grid-col_2s {
+  grid-column: span 2 / auto;
+}
+
+@media only screen and (max-width: 375px) {
+  #grid-container {
+    grid-template-columns: 1fr;
+  }
+}

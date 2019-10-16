@@ -3,7 +3,6 @@ import { DisplayDate, DisplayTime, OpenInfo, TodoList } from "./components";
 import AddNewItemContainer from "./containers/footer/AddNewItemContainer";
 import TodoListItemContainer from "./containers/todo/TodoListItemContainer";
 import TodoItem from "./models/TodoItem";
-import AppStyles from "./App.styles";
 import "./global.css";
 
 interface IAppProps {
@@ -18,32 +17,26 @@ interface IAppProps {
 export default class App extends React.Component<IAppProps> {
   public render() {
     return (
-      <div style={AppStyles.gridContainer()}>
-        <div style={AppStyles.gridItem()}>
+      <div className="grid-container">
+        <div className="grid-item">
           <DisplayDate />
         </div>
-        <div style={AppStyles.gridItem()} />
-        <div style={AppStyles.gridItem()} />
-        <div style={AppStyles.gridItem()}>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item">
           <DisplayTime />
         </div>
-        <div style={AppStyles.gridItem()} />
-        <div
-          style={{
-            ...AppStyles.gridItem(),
-            ...AppStyles.gridItemStart(),
-            ...AppStyles.gridColSpan2()
-          }}
-        >
+        <div className="grid-item" />
+        <div className="grid-item grid-item_start grid-col_2s">
           <TodoList>{this._getTodoListItems()}</TodoList>
         </div>
-        <div style={AppStyles.gridItem()} />
-        <div style={AppStyles.gridItem()}>
+        <div className="grid-item"></div>
+        <div className="grid-item">
           <OpenInfo />
         </div>
-        <div style={AppStyles.gridItem()} />
-        <div style={AppStyles.gridItem()} />
-        <div style={AppStyles.gridItem()}>
+        <div className="grid-item"></div>
+        <div className="grid-item"></div>
+        <div className="grid-item">
           <AddNewItemContainer />
         </div>
       </div>
