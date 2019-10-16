@@ -3,7 +3,7 @@ import * as React from "react";
 export class TodoList extends React.Component {
   public render() {
     const container = {
-      width: "100vw",
+      // width: "100vw",
       minHeight: "20%",
       padding: "8px 20px 0 8px",
       borderRadius: "8px",

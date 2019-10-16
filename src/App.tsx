@@ -18,25 +18,28 @@ export default class App extends React.Component<IAppProps> {
   public render() {
     return (
       <div className="grid-container">
-        <div className="grid-item">
+        {/* HEADER ROW */}
+        <div className="header-row_1">
           <DisplayDate />
         </div>
-        <div className="grid-item"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item">
+        <div className="header-row_2"></div>
+        <div className="header-row_3"></div>
+        <div className="header-row_4">
           <DisplayTime />
         </div>
-        <div className="grid-item" />
-        <div className="grid-item grid-item_start grid-col_2s">
+        {/* CONTENT ROW */}
+        <div className="content-row_1"></div>
+        <div className="content-row_2">
           <TodoList>{this._getTodoListItems()}</TodoList>
         </div>
-        <div className="grid-item"></div>
-        <div className="grid-item">
+        <div className="content-row_3"></div>
+        {/* FOOTER ROW */}
+        <div className="footer-row_1">
           <OpenInfo />
         </div>
-        <div className="grid-item"></div>
-        <div className="grid-item"></div>
-        <div className="grid-item">
+        <div className="footer-row_2"></div>
+        <div className="footer-row_3"></div>
+        <div className="footer-row_4">
           <AddNewItemContainer />
         </div>
       </div>
