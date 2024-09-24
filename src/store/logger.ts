@@ -1,16 +1,15 @@
-const logger =
-  (store: { getState: () => object }) =>
-  (next: (a: unknown) => object) =>
-  (action: { type: unknown }) => {
-    console.group(action.type);
-    console.info("dispatching", action);
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const logger = (store: any) => (next: any) => (action: any) => {
+  console.group(action.type);
+  console.info("dispatching", action);
 
-    const result = next(action);
+  const result = next(action);
 
-    console.log("next state", store.getState());
-    console.groupEnd();
+  console.log("next state", store.getState());
+  console.groupEnd();
 
-    return result;
-  };
+  return result;
+};
 
 export default logger;
+/* eslint-enable */
