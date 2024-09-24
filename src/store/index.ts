@@ -1,9 +1,9 @@
-import { createStore } from "redux";
-import { IState, reducer } from "../reducers/index";
+import { store } from "./store";
 
-const store = createStore<IState, any, any, any>(
-  reducer /* preloadedState, */,
-  (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
-    (window as any).__REDUX_DEVTOOLS_EXTENSION__()
-);
-export default store;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export * from "./store";
+export * from "./hooks";
+export * from "./todosSlice";
+export * from "./uiSlice";
