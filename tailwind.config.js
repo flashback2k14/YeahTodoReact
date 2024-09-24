@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: 'Lato, sans-serif',
+      sans: '"Lato", system-ui',
     },
     extend: {
       boxShadow: {
